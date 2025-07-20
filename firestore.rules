@@ -1,0 +1,33 @@
+// Regras de segurança para uma landing page com formulário de contato (sem autenticação de usuários).
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // --- REGRAS PARA CONTEÚDO PÚBLICO DO SITE ---
+    
+    // Qualquer pessoa pode ler os depoimentos, planos, etc.
+    // Ninguém, exceto você pelo console do Firebase, pode escrever ou apagar.
+    match /testimonials/{doc=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    match /pricingPlans/{doc=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // --- REGRAS PARA O FORMULÁRIO DE CONTATO ---
+    
+    // Coleção onde as mensagens dos leads serão salvas.
+    match /contactMessages/{messageId} {
+      // Permite que qualquer visitante crie (envie) uma nova mensagem.
+      allow create: if true;
+      
+      // Nega a leitura, atualização ou exclusão de mensagens por parte dos visitantes.
+      // Isso protege os dados dos seus leads. Apenas você poderá acessá-los no console do Firebase.
+      allow read, update, delete: if false;
+    }
+  }
+}
