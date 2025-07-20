@@ -8,18 +8,17 @@ export function Footer() {
     <footer className="bg-secondary/50">
       <div className="container py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <Mountain className="h-6 w-6 text-primary" />
-          <span className="font-bold font-headline">AtendaX</span>
+          <img src="https://i.postimg.cc/mrDW2h2b/Atenda-X-Logo-removebg-preview.png" alt="AtendaX Logo" className="h-8" />
         </div>
         <p className="text-sm text-muted-foreground">
-          &copy; {currentYear} AtendaX. All rights reserved.
+          &copy; {currentYear} AtendaX. Todos os direitos reservados.
         </p>
         <div className="flex items-center gap-4">
           <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-            Privacy Policy
+            Política de Privacidade
           </Link>
           <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-            Terms of Service
+            Termos de Serviço
           </Link>
         </div>
       </div>

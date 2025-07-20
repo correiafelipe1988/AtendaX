@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,84 +13,195 @@ import {
 import { ContactForm } from '@/components/contact-form';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { CheckCircle, Zap, Users, MessageSquare, TrendingUp, ShieldCheck } from 'lucide-react';
+import { CheckCircle, Zap, Users, Bot, Sparkles, MessageSquare, Share2, Blocks } from 'lucide-react';
 import Link from 'next/link';
+import Autoplay from 'embla-carousel-autoplay';
 
 export default function Home() {
   const features = [
     {
-      icon: <Zap className="h-8 w-8 text-primary" />,
-      title: 'Real-Time Engagement',
-      description: 'Connect with your customers instantly with our low-latency chat and video solutions.',
+      icon: <Bot className="h-8 w-8 text-primary" />,
+      title: 'Chatbots Inteligentes',
+      description: 'Automatize o atendimento e qualifique leads 24/7 com chatbots que aprendem constantemente.',
     },
     {
-      icon: <Users className="h-8 w-8 text-primary" />,
-      title: 'Team Collaboration',
-      description: 'Powerful tools for your support team to collaborate and resolve issues faster.',
+      icon: <Sparkles className="h-8 w-8 text-primary" />,
+      title: 'Atendimento com IA',
+      description: 'Capacite seus agentes com sugestões de respostas, resumos e análises de sentimento em tempo real.',
     },
     {
-      icon: <TrendingUp className="h-8 w-8 text-primary" />,
-      title: 'Analytics & Insights',
-      description: 'Gain valuable insights into customer satisfaction and team performance.',
+      icon: <Share2 className="h-8 w-8 text-primary" />,
+      title: 'Atendimento Multicanal',
+      description: 'Suporte a WhatsApp, Instagram, Facebook, Telegram e chat web, tudo em um só painel.',
     },
     {
-      icon: <ShieldCheck className="h-8 w-8 text-primary" />,
-      title: 'Secure & Reliable',
-      description: 'Enterprise-grade security and 99.9% uptime to ensure your data is safe.',
+      icon: <Blocks className="h-8 w-8 text-primary" />,
+      title: 'Integrações e API',
+      description: 'Integre com qualquer sistema via API REST, webhooks e ferramentas como N8N, SMS e telefonia.',
     },
   ];
 
   const testimonials = [
     {
-      quote: "AtendaX transformed our customer support. We've seen a 40% increase in customer satisfaction!",
-      name: 'Sarah Johnson',
-      title: 'CEO, Tech Innovators',
-      avatar: 'https://placehold.co/100x100.png',
+      quote: "O AtendaX transformou nosso suporte ao cliente. Vimos um aumento de 40% na satisfação do cliente!",
+      name: 'Joana Silva',
+      title: 'CEO, Inovadores Tech',
+      avatar: 'https://i.postimg.cc/rsQ2WF2J/mulher-1.png',
       hint: 'woman portrait',
     },
     {
-      quote: 'The platform is intuitive and powerful. Our team was up and running in a single day.',
-      name: 'Michael Chen',
-      title: 'Support Lead, Creative Solutions',
-      avatar: 'https://placehold.co/100x100.png',
+      quote: 'A plataforma é intuitiva e poderosa. Nossa equipe estava pronta e operando em um único dia.',
+      name: 'Carlos Pereira',
+      title: 'Líder de Suporte, Soluções Criativas',
+      avatar: 'https://i.postimg.cc/ZYjGwRXP/homem.png',
       hint: 'man portrait',
     },
     {
-      quote: "I can't imagine going back. The analytics features alone are worth their weight in gold.",
-      name: 'Emily Rodriguez',
-      title: 'COO, Fast-Track Logistics',
-      avatar: 'https://placehold.co/100x100.png',
+      quote: "Não consigo imaginar voltar atrás. Os recursos de análise por si só valem seu peso em ouro.",
+      name: 'Fernanda Costa',
+      title: 'COO, Logística Acelerada',
+      avatar: 'https://i.postimg.cc/rp63DttT/mulher2.png',
       hint: 'woman professional',
     },
+  ];
+
+  const pricingPlans = [
+    {
+      name: 'Basic',
+      price: 'R$ 127,00',
+      period: '/mês',
+      features: [
+        'IA Integrada',
+        '1 Canal de Atendimento',
+        '5 Atendentes',
+        'Criação de ChatBot',
+        'Agendamento de Mensagem',
+        'Criação de Setores',
+        'Avaliação de Atendimento',
+        'Espiar Conversa',
+        'Chat Interno',
+        'Respostas Rápidas',
+        'Criação de Tags (Etiquetas)',
+        'CRM - Crie funis de vendas e etc.',
+        'Nota Interna',
+      ],
+      cta: 'Assinar Plano',
+      borderColor: 'border-gray-300',
+    },
+    {
+      name: 'Premium',
+      price: 'R$ 197,00',
+      period: '/mês',
+      features: [
+        'IA Integrada',
+        '3 Canais de Atendimento',
+        '10 Atendentes',
+        'Criação de ChatBot',
+        'Agendamento de Mensagem',
+        'Criação de Setores',
+        'Avaliação de Atendimento',
+        'Espiar Conversa',
+        'Chat Interno',
+        'Respostas Rápidas',
+        'Criação de Tags (Etiquetas)',
+        'CRM - Crie funis de vendas e etc.',
+        'Nota Interna',
+      ],
+      cta: 'Assinar Plano',
+      popular: true,
+      borderColor: 'border-primary',
+    },
+    {
+      name: 'Business',
+      price: 'R$ 397,00',
+      period: '/mês',
+      features: [
+        'IA Integrada',
+        '10 Canais de Atendimento',
+        '30 Atendentes',
+        'Criação de ChatBot',
+        'Agendamento de Mensagem',
+        'Criação de Setores',
+        'Avaliação de Atendimento',
+        'Espiar Conversa',
+        'Chat Interno',
+        'Respostas Rápidas',
+        'Criação de Tags (Etiquetas)',
+        'CRM - Crie funis de vendas e etc.',
+        'Nota Interna',
+      ],
+      cta: 'Assinar Plano',
+      borderColor: 'border-gray-300',
+    },
+  ];
+
+  const systemImages = [
+    'https://i.postimg.cc/52xNMxh3/image.png',
+    'https://i.postimg.cc/xTQzpNPp/image.png',
+    'https://i.postimg.cc/pXZMz3Tc/image.png',
+    'https://i.postimg.cc/5tVMd163/image.png'
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Seção Hero */}
         <section className="py-20 md:py-32 bg-secondary/30">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tighter mb-4">
-              Revolutionize Your Customer Service
-            </h1>
-            <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
-              AtendaX provides a seamless, integrated platform to manage all your customer interactions, boosting
-              satisfaction and efficiency.
-            </p>
-            <Button size="lg" asChild>
-              <Link href="#contact">Request a Demo</Link>
-            </Button>
+          <div className="container grid md:grid-cols-2 gap-12 items-center">
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tighter mb-4">
+                Revolucione o seu Atendimento ao Cliente
+              </h1>
+              <p className="max-w-xl mx-auto md:mx-0 text-lg md:text-xl text-muted-foreground mb-8">
+                O AtendaX oferece uma plataforma integrada e transparente para gerenciar todas as suas interações com clientes, aumentando a satisfação e a eficiência.
+              </p>
+              <Button size="lg" asChild>
+                <Link href="#contact">Solicite uma Demonstração</Link>
+              </Button>
+            </div>
+            <div className="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[8px] rounded-t-xl h-auto max-w-full">
+              <div className="rounded-xl overflow-hidden bg-white dark:bg-gray-800">
+                <Carousel
+                  opts={{ align: 'start', loop: true }}
+                  plugins={[
+                    Autoplay({
+                      delay: 2000,
+                    }),
+                  ]}
+                  className="w-full h-auto"
+                >
+                  <CarouselContent>
+                    {systemImages.map((src, index) => (
+                      <CarouselItem key={index}>
+                        <Image
+                          src={src}
+                          alt={`Demonstração do sistema ${index + 1}`}
+                          width={1280}
+                          height={720}
+                          layout="responsive"
+                          objectFit="contain"
+                          className="rounded-lg"
+                          priority={index === 0}
+                        />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Seção de Recursos */}
         <section id="features" className="py-20 md:py-24">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold font-headline">Why AtendaX?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">Por que o AtendaX?</h2>
               <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
-                Everything you need to deliver world-class customer support.
+                A plataforma definitiva para equipes que buscam atendimento inteligente, ágil e multicanal com tecnologia de ponta.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -110,13 +223,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Video Section */}
+        {/* Seção de Vídeo */}
         <section id="video" className="py-20 md:py-24 bg-secondary/30">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold font-headline">See AtendaX in Action</h2>
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">Veja o AtendaX em Ação</h2>
               <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
-                Watch a quick overview of how our platform can help your business thrive.
+                Assista a uma rápida visão geral de como nossa plataforma pode ajudar sua empresa a prosperar.
               </p>
             </div>
             <div className="aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl border">
@@ -132,13 +245,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* Seção de Depoimentos */}
         <section id="testimonials" className="py-20 md:py-24">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold font-headline">Loved by Teams Worldwide</h2>
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">Amado por Equipes em Todo o Mundo</h2>
               <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
-                Don't just take our word for it. Here's what our customers have to say.
+                Não acredite apenas em nossa palavra. Veja o que nossos clientes têm a dizer.
               </p>
             </div>
             <Carousel opts={{ align: 'start', loop: true }} className="w-full max-w-4xl mx-auto">
@@ -176,36 +289,87 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Contact Section */}
+        {/* Seção de Preços */}
+        <section id="pricing" className="py-20 md:py-24">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">Planos Flexíveis para o seu Negócio</h2>
+              <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                Escolha o plano ideal para sua equipe e comece a transformar seu atendimento hoje mesmo.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {pricingPlans.map((plan) => (
+                <Card
+                  key={plan.name}
+                  className={`flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-300 border-2 ${plan.borderColor}`}
+                >
+                  {plan.popular && (
+                    <div className="bg-primary text-primary-foreground text-center py-1 font-semibold text-sm">
+                      Mais Popular
+                    </div>
+                  )}
+                  <CardHeader className="items-center text-center pt-8">
+                    <CardTitle className="text-2xl font-headline">{plan.name}</CardTitle>
+                    <div className="flex items-baseline">
+                      <span className="text-4xl font-bold tracking-tighter">{plan.price}</span>
+                      <span className="text-lg text-muted-foreground">{plan.period}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col justify-between p-8">
+                    <ul className="space-y-4 mb-8 text-left">
+                      {plan.features.map((feature) => (
+                        <li key={feature} className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      size="lg"
+                      className="w-full"
+                      variant="default"
+                      asChild
+                    >
+                      <Link href="#contact">{plan.cta}</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Seção de Contato */}
         <section id="contact" className="py-20 md:py-24 bg-secondary/30">
           <div className="container">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold font-headline">Ready to Get Started?</h2>
+                <h2 className="text-3xl md:text-4xl font-bold font-headline">Pronto para Começar?</h2>
                 <p className="text-muted-foreground mt-4 mb-8">
-                  Fill out the form to schedule a personalized demo with one of our experts. Let's explore how AtendaX
-                  can elevate your customer service.
+                  Preencha o formulário para agendar uma demonstração personalizada com um de nossos especialistas. Vamos explorar como o AtendaX
+                  pode elevar o seu atendimento ao cliente.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold">Personalized Demo</h3>
-                      <p className="text-muted-foreground">See the features that matter most to you.</p>
+                      <h3 className="font-semibold">Demonstração Personalizada</h3>
+                      <p className="text-muted-foreground">Veja os recursos que mais importam para você.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold">Expert Consultation</h3>
-                      <p className="text-muted-foreground">Get your questions answered by our product specialists.</p>
+                      <h3 className="font-semibold">Consulta com Especialista</h3>
+                      <p className="text-muted-foreground">Tire suas dúvidas com nossos especialistas de produto.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold">No-Obligation Quote</h3>
-                      <p className="text-muted-foreground">Receive transparent pricing tailored to your needs.</p>
+                      <h3 className="font-semibold">Orçamento sem Compromisso</h3>
+                      <p className="text-muted-foreground">Receba preços transparentes adaptados às suas necessidades.</p>
                     </div>
                   </div>
                 </div>

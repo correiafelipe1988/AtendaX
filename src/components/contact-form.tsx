@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { collection, addDoc } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,19 +17,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { db } from "@/lib/firebase";
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: "O nome deve ter pelo menos 2 caracteres.",
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: "Por favor, insira um endereço de e-mail válido.",
   }),
   company: z.string().min(2, {
-    message: "Company name must be at least 2 characters.",
+    message: "O nome da empresa deve ter pelo menos 2 caracteres.",
   }),
   message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
+    message: "A mensagem deve ter pelo menos 10 caracteres.",
   }),
 });
 
@@ -46,15 +48,27 @@ export function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // In a real app, you would send this to your backend.
-    console.log(values);
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. We'll get back to you soon.",
-    });
+    try {
+      const docRef = await addDoc(collection(db, "contactMessages"), {
+        ...values,
+        receivedAt: new Date(),
+      });
+      console.log("Document written with ID: ", docRef.id);
 
-    form.reset();
+      toast({
+        title: "Mensagem Enviada!",
+        description: "Obrigado por entrar em contato. Retornaremos em breve.",
+      });
+
+      form.reset();
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      toast({
+        title: "Erro ao Enviar",
+        description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -66,9 +80,9 @@ export function ContactForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel>Nome Completo</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input placeholder="João da Silva" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,9 +93,9 @@ export function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel>Endereço de E-mail</FormLabel>
                 <FormControl>
-                  <Input placeholder="john.doe@example.com" {...field} />
+                  <Input placeholder="joao.silva@exemplo.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -93,9 +107,9 @@ export function ContactForm() {
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Company Name</FormLabel>
+              <FormLabel>Nome da Empresa</FormLabel>
               <FormControl>
-                <Input placeholder="Acme Inc." {...field} />
+                <Input placeholder="Acme Ltda." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,16 +120,16 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your Message</FormLabel>
+              <FormLabel>Sua Mensagem</FormLabel>
               <FormControl>
-                <Textarea placeholder="How can we help you?" {...field} className="min-h-[120px]" />
+                <Textarea placeholder="Como podemos ajudá-lo?" {...field} className="min-h-[120px]" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button type="submit" size="lg" className="w-full md:w-auto">
-          Send Message
+          Enviar Mensagem
         </Button>
       </form>
     </Form>
