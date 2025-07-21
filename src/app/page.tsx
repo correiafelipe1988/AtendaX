@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -13,7 +12,8 @@ import {
 import { ContactForm } from '@/components/contact-form';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { CheckCircle, Zap, Users, Bot, Sparkles, MessageSquare, Share2, Blocks } from 'lucide-react';
+import { WhatsAppButton } from '@/components/whatsapp-button';
+import { CheckCircle, Bot, Sparkles, MessageSquare, Share2, Blocks } from 'lucide-react';
 import Link from 'next/link';
 import Autoplay from 'embla-carousel-autoplay';
 
@@ -174,15 +174,11 @@ export default function Home() {
                   <CarouselContent>
                     {systemImages.map((src, index) => (
                       <CarouselItem key={index}>
-                        <Image
+                        <img
                           src={src}
                           alt={`Demonstração do sistema ${index + 1}`}
-                          width={1280}
-                          height={720}
-                          layout="responsive"
-                          objectFit="contain"
-                          className="rounded-lg"
-                          priority={index === 0}
+                          className="rounded-lg w-full h-auto object-contain"
+                          loading={index === 0 ? "eager" : "lazy"}
                         />
                       </CarouselItem>
                     ))}
@@ -237,10 +233,214 @@ export default function Home() {
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                 title="YouTube video player"
-                frameBorder="0"
+                style={{border: "none"}}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção de Integrações Nativas */}
+        <section id="integrations" className="py-20 md:py-24">
+          <div className="container">
+            <div className="text-center mb-12">
+              <p className="text-primary font-semibold mb-2">Integrações Nativas</p>
+              <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">
+                Chatbots, Ferramentas de <br />
+                Automação e <span className="text-primary">APIs</span>
+              </h2>
+              <p className="max-w-4xl mx-auto text-muted-foreground text-lg">
+                Integre-se facilmente com aplicativos externos usando nossas APIs e Webhooks, ou aproveite nossas integrações nativas com Typebot, Dify.ai, Chat GPT, LM Studio, Wavoip e vários outros canais de atendimento através do Hub Notificame.
+              </p>
+              <div className="mt-8">
+                <Button size="lg" asChild>
+                  <Link href="#contact">QUERO ASSINAR</Link>
+                </Button>
+              </div>
+            </div>
+            
+            {/* Carousel Contínuo de Integrações */}
+            <div className="mt-16 overflow-hidden">
+              <div className="flex animate-scroll space-x-12">
+                {/* Primeiro conjunto de logos */}
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-1.png"
+                    alt="N8N"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/webhook-new.png"
+                    alt="Webhooks"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-3.png"
+                    alt="Dialogflow"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-4.png"
+                    alt="Wavoip"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-5.png"
+                    alt="Dify"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                
+                {/* Duplicação para animação contínua */}
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-1.png"
+                    alt="N8N"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/webhook-new.png"
+                    alt="Webhooks"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-3.png"
+                    alt="Dialogflow"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-4.png"
+                    alt="Wavoip"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="flex items-center justify-center min-w-[200px]">
+                  <img
+                    src="/assets/integrations/integration-5.png"
+                    alt="Dify"
+                    className="h-24 w-auto object-contain opacity-100 transition-opacity"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção de Múltiplos Canais */}
+        <section id="multiple-channels" className="py-20 md:py-24 bg-secondary/30">
+          <div className="container">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Conteúdo à esquerda */}
+              <div>
+                <p className="text-primary font-semibold mb-2">Concentre todas as suas mensagens</p>
+                <h2 className="text-3xl md:text-4xl font-bold font-headline mb-6">
+                  Múltiplos Canais, <br />
+                  de <span className="bg-primary text-primary-foreground px-1 py-0.5 rounded">atendimento</span>
+                </h2>
+                <p className="text-muted-foreground text-lg mb-8">
+                  API WhatsApp Oficial (WABA), APIs WhatsApp não oficiais (bailyes, webjs, meow, evolution), Hub 
+                  Notificame (Facebook Messenger, Instagram, Webchat, Email), Telegram.
+                </p>
+                
+                {/* Grade de funcionalidades */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Todos chats em uma única tela</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Múltiplos Atendentes</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Sistema de Tickets</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Agendamentos de mensagem</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Setorização de atendimento (filas)</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold">Integração com Chatbots</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Imagem à direita */}
+              <div className="flex items-center justify-center">
+                <img
+                  src="https://i.postimg.cc/cJYYRWRq/image.png"
+                  alt="Múltiplos canais de atendimento"
+                  className="w-full max-w-lg h-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção de Agentes de IA */}
+        <section id="ai-agents" className="py-20 md:py-24">
+          <div className="container">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Conteúdo à esquerda */}
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold font-headline mb-6">
+                  Plugue <span className="bg-primary text-primary-foreground px-2 py-1 rounded">agentes de I.A</span> com facilidade
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Conexão direta com Chat GPT, Gemini, Claude, Grok, Deepseek, 
+                  Ollama, Qwen e LM Studio para soluções open source no seu 
+                  próprio servidor.
+                </p>
+              </div>
+              
+              {/* Imagem dos Agentes de IA à direita */}
+              <div className="flex items-center justify-center">
+                <img
+                  src="https://i.postimg.cc/Y9mKSGkK/image-removebg-preview-1.png"
+                  alt="Agentes de IA conectados"
+                  className="w-full max-w-2xl h-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -265,13 +465,12 @@ export default function Home() {
                           <p className="text-foreground mb-4">"{testimonial.quote}"</p>
                         </CardContent>
                         <CardHeader className="flex-row items-center gap-4 pt-0">
-                          <Image
+                          <img
                             src={testimonial.avatar}
                             alt={testimonial.name}
-                            width={48}
-                            height={48}
-                            className="rounded-full"
+                            className="rounded-full w-12 h-12 object-cover"
                             data-ai-hint={testimonial.hint}
+                            loading="lazy"
                           />
                           <div>
                             <CardTitle className="text-base font-semibold">{testimonial.name}</CardTitle>
@@ -382,6 +581,7 @@ export default function Home() {
         </section>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

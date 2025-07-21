@@ -3,8 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { collection, addDoc } from "firebase/firestore";
-
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,7 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { db } from "@/lib/firebase";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -39,6 +38,17 @@ const formSchema = z.object({
   }),
 });
 
+// Configuração Firebase
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
+
 export function ContactForm() {
   const { toast } = useToast();
 
@@ -55,12 +65,12 @@ export function ContactForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("🚀 Iniciando submissão do formulário:", values);
-    console.log("🔧 Firebase config check:", {
-      dbInstance: !!db,
-      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
-    });
-
+    
     try {
+      // Inicializar Firebase no cliente
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      
       console.log("📝 Tentando salvar no Firestore...");
       const docRef = await addDoc(collection(db, "contactMessages"), {
         ...values,
@@ -68,7 +78,7 @@ export function ContactForm() {
         timestamp: Date.now()
       });
       console.log("✅ Document written with ID: ", docRef.id);
-
+      
       toast({
         title: "Mensagem Enviada!",
         description: "Obrigado por entrar em contato. Retornaremos em breve.",
@@ -77,7 +87,6 @@ export function ContactForm() {
       form.reset();
     } catch (e) {
       console.error("❌ Error adding document: ", e);
-      console.error("❌ Error details:", e instanceof Error ? e.message : String(e));
       toast({
         title: "Erro ao Enviar",
         description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",

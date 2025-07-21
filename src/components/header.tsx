@@ -10,11 +10,14 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <img src="https://i.postimg.cc/mrDW2h2b/Atenda-X-Logo-removebg-preview.png" alt="AtendaX Logo" className="h-12" />
+          <img src="https://i.postimg.cc/mrDW2h2b/Atenda-X-Logo-removebg-preview.png" alt="AtendaX Logo" className="h-14" />
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link href="/#features" className="text-foreground/70 transition-colors hover:text-foreground">
             Recursos
+          </Link>
+          <Link href="/#integrations" className="text-foreground/70 transition-colors hover:text-foreground">
+            Integrações
           </Link>
           <Link href="/#testimonials" className="text-foreground/70 transition-colors hover:text-foreground">
             Depoimentos
@@ -40,10 +43,13 @@ export function Header() {
             <SheetContent side="right">
               <nav className="grid gap-6 text-lg font-medium mt-8">
                 <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
-                <img src="https://i.postimg.cc/mrDW2h2b/Atenda-X-Logo-removebg-preview.png" alt="AtendaX Logo" className="h-12" />
+                <img src="https://i.postimg.cc/mrDW2h2b/Atenda-X-Logo-removebg-preview.png" alt="AtendaX Logo" className="h-14" />
                 </Link>
                 <Link href="/#features" className="text-muted-foreground hover:text-foreground">
                   Recursos
+                </Link>
+                <Link href="/#integrations" className="text-muted-foreground hover:text-foreground">
+                  Integrações
                 </Link>
                 <Link href="/#testimonials" className="text-muted-foreground hover:text-foreground">
                   Depoimentos
