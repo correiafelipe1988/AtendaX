@@ -85,7 +85,7 @@ export default function Home() {
         'CRM - Crie funis de vendas e etc.',
         'Nota Interna',
       ],
-      cta: 'Assinar Plano',
+      cta: 'Falar com Especialista',
       borderColor: 'border-gray-300',
     },
     {
@@ -107,7 +107,7 @@ export default function Home() {
         'CRM - Crie funis de vendas e etc.',
         'Nota Interna',
       ],
-      cta: 'Assinar Plano',
+      cta: 'Falar com Especialista',
       popular: true,
       borderColor: 'border-primary',
     },
@@ -130,7 +130,7 @@ export default function Home() {
         'CRM - Crie funis de vendas e etc.',
         'Nota Interna',
       ],
-      cta: 'Assinar Plano',
+      cta: 'Falar com Especialista',
       borderColor: 'border-gray-300',
     },
   ];
