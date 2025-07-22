@@ -231,10 +231,10 @@ export default function Home() {
             <div className="aspect-video max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl border">
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="YouTube video player"
+                src="https://player.vimeo.com/video/1103317840"
+                title="Vimeo video player"
                 style={{border: "none"}}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
               ></iframe>
             </div>
