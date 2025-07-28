@@ -68,7 +68,7 @@ export default function Home() {
   const pricingPlans = [
     {
       name: 'Basic',
-      price: 'R$ 127,00',
+      price: 'R$ 197,00',
       period: '/mês',
       features: [
         'IA Integrada',
@@ -90,7 +90,7 @@ export default function Home() {
     },
     {
       name: 'Premium',
-      price: 'R$ 197,00',
+      price: 'R$ 297,00',
       period: '/mês',
       features: [
         'IA Integrada',
