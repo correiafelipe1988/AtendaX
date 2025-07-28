@@ -117,8 +117,8 @@ export default function Home() {
       period: '/mês',
       features: [
         'IA Integrada',
-        '10 Canais de Atendimento',
-        '30 Atendentes',
+        '5 Canais de Atendimento',
+        '15 Atendentes',
         'Criação de ChatBot',
         'Agendamento de Mensagem',
         'Criação de Setores',
